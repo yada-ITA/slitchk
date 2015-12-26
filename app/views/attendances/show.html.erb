@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @attendance.member %>
+</p>
+
+<p>
+  <strong>Wk day:</strong>
+  <%= @attendance.wk_day %>
+</p>
+
+<p>
+  <strong>Arrival:</strong>
+  <%= @attendance.arrival %>
+</p>
+
+<p>
+  <strong>Departure:</strong>
+  <%= @attendance.departure %>
+</p>
+
+<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
+<%= link_to 'Back', attendances_path %>
