@@ -16,8 +16,8 @@
   <tbody>
     <% @attendances.each do |attendance| %>
       <tr>
-        <td><%= attendance.member %></td>
-        <td><%= attendance.wk_day %></td>
+        <td><%= attendance.member.name %></td>
+        <td><%= attendance.wk_day%></td>
         <td><%= attendance.arrival %></td>
         <td><%= attendance.departure %></td>
         <td><%= link_to 'Show', attendance %></td>
@@ -31,3 +31,6 @@
 <br>
 
 <%= link_to 'New Attendance', new_attendance_path %>
+
+<hr>
+<%= link_to 'root', root_path %>
