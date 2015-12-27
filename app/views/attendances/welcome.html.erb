@@ -1,0 +1,34 @@
+今日は<%= today %> です。
+<%if @attendance.arrival.nil? %>
+  おはようございます!
+	<%= form_for(@attendance) do |f| %>
+	  <div class="field">
+	    <%= f.label :member_id %><br>
+      <%= f.collection_select :member_id, Member.all, :id, :name %>
+	  </div>
+
+	  <div class="actions">
+	    <%= f.submit "出勤" %>
+	  </div>
+	<% end %>
+<% else %>
+  お疲れさまでした！
+  <%= form_for(@attendance) do |f| %>
+    <div class="field">
+      <%= f.label :arrival %><br>
+      <%= @attendance.arrival_time %>
+    </div>
+     <% if @attendance.departure? %>
+      <div class="field">
+        <%= f.label :departure %><br>
+        <%= @attendance.departure_time %>
+      </div>
+     <% else %>
+      <div class="actions">
+        <%= f.submit "退勤"%>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+

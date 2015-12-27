@@ -25,7 +25,9 @@ class AttendancesController < ApplicationController
   # POST /attendances.json
   def create
     @attendance = Attendance.new(attendance_params)
-
+    @attendance.wk_day = Date.today
+    @attendance.arrival = DateTime.now
+    session[:member_id] = @attendance.member_id if @attendance.member_id.present?
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to @attendance, notice: 'Attendance was successfully created.' }
@@ -61,6 +63,15 @@ class AttendancesController < ApplicationController
     end
   end
 
+  def welcome
+    if session[:member_id]
+      @attendance = Attendance.where(member_id: session[:member_id]).arrivaled.first
+      @attendance = Attendance.new if @attendance.nil?
+    else
+      @attendance = Attendance.new
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance
@@ -69,6 +80,6 @@ class AttendancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendance_params
-      params.require(:attendance).permit(:member_id, :wk_day, :arrival, :departure)
+      params.fetch(:attendance, {"departure" => DateTime.now} ).permit(:member_id, :wk_day, :arrival, :departure)
     end
 end

@@ -2,23 +2,22 @@
 
 <p>
   <strong>Member:</strong>
-  <%= @attendance.member %>
+  <%= @attendance.member.name %>
 </p>
 
 <p>
   <strong>Wk day:</strong>
-  <%= @attendance.wk_day %>
+  <%= @attendance.wk_day.strftime("%Y/%m/%d") %>
 </p>
 
 <p>
   <strong>Arrival:</strong>
-  <%= @attendance.arrival %>
+  <%= @attendance.arrival_time %>
 </p>
 
 <p>
   <strong>Departure:</strong>
-  <%= @attendance.departure %>
+  <%= @attendance.departure_time %>
 </p>
 
-<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
-<%= link_to 'Back', attendances_path %>
+<%= link_to 'Back', root_path %>
